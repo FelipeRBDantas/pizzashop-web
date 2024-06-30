@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DialogDescription } from '@radix-ui/react-dialog'
+import { DialogClose, DialogDescription } from '@radix-ui/react-dialog'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -30,6 +30,7 @@ export function StoreProfileDialog() {
   const { data: managedRestaurant } = useQuery({
     queryKey: ['managed-restaurant'],
     queryFn: getManagedRestaurant,
+    staleTime: Infinity,
   })
 
   const {
@@ -92,9 +93,11 @@ export function StoreProfileDialog() {
         </div>
 
         <DialogFooter>
-          <Button variant="ghost" type="button">
-            Cancelar
-          </Button>
+          <DialogClose asChild>
+            <Button variant="ghost" type="button">
+              Cancelar
+            </Button>
+          </DialogClose>
 
           <Button type="submit" variant="success" disabled={isSubmitting}>
             Salvar
