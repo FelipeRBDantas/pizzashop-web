@@ -106,7 +106,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
       <TableCell>
         <Button
-          disabled={!['pending', 'canceled'].includes(order.status)}
+          disabled={!['pending', 'processing'].includes(order.status)}
           onClick={() => cancelOrderFn({ orderId: order.orderId })}
           variant="ghost"
           size="xs"
