@@ -34,6 +34,26 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
       const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
         queryKey: ['orders'],
       })
+
+      ordersListCache.forEach(([cacheKey, cacheData]) => {
+        if (!cacheData) {
+          return
+        }
+
+        queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
+          ...cacheData,
+          orders: cacheData.orders.map((order) => {
+            if (order.orderId === orderId) {
+              return {
+                ...order,
+                status: 'canceled',
+              }
+            }
+
+            return order
+          }),
+        })
+      })
     },
   })
 
