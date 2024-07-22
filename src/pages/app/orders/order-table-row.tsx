@@ -4,7 +4,10 @@ import { ptBR } from 'date-fns/locale'
 import { ArrowRight, Search, X } from 'lucide-react'
 import { useState } from 'react'
 
+import { approveOrder } from '@/api/approve-order'
 import { cancelOrder } from '@/api/cancel-order'
+import { deliverOrder } from '@/api/deliver-order'
+import { dispatchOrder } from '@/api/dispatch-order'
 import { GetOrdersResponse } from '@/api/get-orders'
 import { OrderStatus } from '@/components/order-status'
 import { Button } from '@/components/ui/button'
@@ -28,32 +31,57 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
   const queryClient = useQueryClient()
 
+  function updateOrderStatusOnCache(orderId: string, status: OrderStatus) {
+    const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
+      queryKey: ['orders'],
+    })
+
+    ordersListCache.forEach(([cacheKey, cacheData]) => {
+      if (!cacheData) {
+        return
+      }
+
+      queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
+        ...cacheData,
+        orders: cacheData.orders.map((order) => {
+          if (order.orderId === orderId) {
+            return {
+              ...order,
+              status,
+            }
+          }
+
+          return order
+        }),
+      })
+    })
+  }
+
   const { mutateAsync: cancelOrderFn } = useMutation({
     mutationFn: cancelOrder,
     async onSuccess(_, { orderId }) {
-      const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
-        queryKey: ['orders'],
-      })
+      updateOrderStatusOnCache(orderId, 'canceled')
+    },
+  })
 
-      ordersListCache.forEach(([cacheKey, cacheData]) => {
-        if (!cacheData) {
-          return
-        }
+  const { mutateAsync: approveOrderFn } = useMutation({
+    mutationFn: approveOrder,
+    async onSuccess(_, { orderId }) {
+      updateOrderStatusOnCache(orderId, 'processing')
+    },
+  })
 
-        queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
-          ...cacheData,
-          orders: cacheData.orders.map((order) => {
-            if (order.orderId === orderId) {
-              return {
-                ...order,
-                status: 'canceled',
-              }
-            }
+  const { mutateAsync: dispatchOrderFn } = useMutation({
+    mutationFn: dispatchOrder,
+    async onSuccess(_, { orderId }) {
+      updateOrderStatusOnCache(orderId, 'delivering')
+    },
+  })
 
-            return order
-          }),
-        })
-      })
+  const { mutateAsync: deliverOrderFn } = useMutation({
+    mutationFn: deliverOrder,
+    async onSuccess(_, { orderId }) {
+      updateOrderStatusOnCache(orderId, 'delivered')
     },
   })
 
