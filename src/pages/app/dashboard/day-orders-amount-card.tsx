@@ -18,7 +18,7 @@ export function DayOrdersAmountCard() {
         <Utensils className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="space-y-1">
         {dayOrdersAmount && (
           <>
             <span className="text-2xl font-bold tracking-tight">
@@ -26,7 +26,7 @@ export function DayOrdersAmountCard() {
             </span>
 
             <p className="text-xs text-muted-foreground">
-              {dayOrdersAmount.diffFromYesterday > 0 ? (
+              {dayOrdersAmount.diffFromYesterday >= 0 ? (
                 <>
                   <span className="text-emerald-500 dark:text-emerald-400">
                     + {dayOrdersAmount.diffFromYesterday}%
@@ -36,7 +36,7 @@ export function DayOrdersAmountCard() {
               ) : (
                 <>
                   <span className="text-rose-500 dark:text-rose-400">
-                    - {dayOrdersAmount.diffFromYesterday}%
+                    {dayOrdersAmount.diffFromYesterday}%
                   </span>{' '}
                   em relação à ontem
                 </>
