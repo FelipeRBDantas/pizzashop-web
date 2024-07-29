@@ -24,9 +24,9 @@ Url do projeto backend: https://github.com/rocketseat-education/pizzashop-api
 
 ### Dashboard (dark/light)
 
-![dashboard_light_1](https://github.com/user-attachments/assets/2844331e-a3af-4b43-bc52-86d9a54b3b71)
+![dashboard_light_1](https://github.com/user-attachments/assets/3d48835d-7a1a-40f6-b50b-7dae1977fe5b)
 
-![dashboard_dark_1](https://github.com/user-attachments/assets/09b1dba1-afe5-4c8e-849a-430760bb613b)
+![dashboard_dark_1](https://github.com/user-attachments/assets/7df9c1fe-fa94-491c-9b06-d17f2f295698)
 
 ### Atualizar Perfil (dark/light)
 
