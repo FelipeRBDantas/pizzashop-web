@@ -3,7 +3,7 @@ import { BarChart } from 'lucide-react'
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import colors from 'tailwindcss/colors'
 
-import { GetPopularProducts } from '@/api/get-popular-products'
+import { getPopularProducts } from '@/api/get-popular-products'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const COLORS = [
@@ -17,7 +17,7 @@ const COLORS = [
 export function PopularProductsChart() {
   const { data: popularProducts } = useQuery({
     queryKey: ['metrics', 'popular-products'],
-    queryFn: GetPopularProducts,
+    queryFn: getPopularProducts,
   })
 
   return (
