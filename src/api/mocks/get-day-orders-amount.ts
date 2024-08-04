@@ -7,8 +7,5 @@ export const getDayOrdersAmountMock = http.post<
   never,
   GetDayOrdersAmountResponse
 >('/metrics/day-orders-amount', () => {
-  return HttpResponse.json(
-    { amount: 20, diffFromYesterday: -5 },
-    { status: 200 },
-  )
+  return HttpResponse.json({ amount: 20, diffFromYesterday: -5 })
 })
