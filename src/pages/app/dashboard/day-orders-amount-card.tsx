@@ -24,7 +24,8 @@ export function DayOrdersAmountCard() {
         {dayOrdersAmount ? (
           <>
             <span className="text-2xl font-bold tracking-tight">
-              {dayOrdersAmount.amount.toLocaleString('pt-BR')}
+              {dayOrdersAmount.amount &&
+                dayOrdersAmount.amount?.toLocaleString('pt-BR')}
             </span>
 
             <p className="text-xs text-muted-foreground">
