@@ -45,3 +45,11 @@ Url do projeto backend: https://github.com/rocketseat-education/pizzashop-api
 ![request_details_light_1](https://github.com/user-attachments/assets/279b216a-726b-4193-a074-610c29931eeb)
 
 ![request_details_dark_1](https://github.com/user-attachments/assets/26e57003-78bd-4220-aef7-9075513b13ab)
+
+## Testes
+
+A aplicação contém testes unitários, E2E e Mocks utilizando MSW. Abaixo, é representado a execução da aplicação em modo de teste. E nos logs podemos ver o MSW habilitado e utilizando dados mocados.
+
+### Dashboard
+
+![msw-dashboard](https://github.com/user-attachments/assets/7d18b307-8f39-4c32-9895-9de9b9b38d35)
