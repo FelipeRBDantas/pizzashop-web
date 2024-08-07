@@ -10,7 +10,7 @@ describe('Order status', () => {
 
     const statusText = wrapper.getByText('Cancelado')
 
-    const badgeElement = wrapper.getByTestId('badge')
+    const badgeElement = wrapper.getByTestId('badge-canceled')
 
     expect(statusText).toBeInTheDocument()
 
@@ -24,7 +24,7 @@ describe('Order status', () => {
 
     const statusText = wrapper.getByText('Pendente')
 
-    const badgeElement = wrapper.getByTestId('badge')
+    const badgeElement = wrapper.getByTestId('badge-pending')
 
     expect(statusText).toBeInTheDocument()
 
@@ -38,7 +38,7 @@ describe('Order status', () => {
 
     const statusText = wrapper.getByText('Em entrega')
 
-    const badgeElement = wrapper.getByTestId('badge')
+    const badgeElement = wrapper.getByTestId('badge-processing-delivering')
 
     expect(statusText).toBeInTheDocument()
 
@@ -52,7 +52,7 @@ describe('Order status', () => {
 
     const statusText = wrapper.getByText('Em preparo')
 
-    const badgeElement = wrapper.getByTestId('badge')
+    const badgeElement = wrapper.getByTestId('badge-processing-delivering')
 
     expect(statusText).toBeInTheDocument()
 
@@ -66,7 +66,7 @@ describe('Order status', () => {
 
     const statusText = wrapper.getByText('Entregue')
 
-    const badgeElement = wrapper.getByTestId('badge')
+    const badgeElement = wrapper.getByTestId('badge-delivered')
 
     expect(statusText).toBeInTheDocument()
 
