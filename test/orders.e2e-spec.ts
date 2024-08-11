@@ -45,3 +45,39 @@ test('paginate orders', async ({ page }) => {
 
   expect(page.getByRole('cell', { name: 'Customer 10' })).toBeVisible()
 })
+
+test('filter by order id', async ({ page }) => {
+  await page.goto('/orders', { waitUntil: 'networkidle' })
+
+  await page.getByPlaceholder('ID do pedido').fill('order-11')
+
+  await page.getByRole('button', { name: 'Filtrar resultados' }).click()
+
+  expect(page.getByRole('cell', { name: 'order-11' })).toBeVisible()
+})
+
+test('filter by customer name', async ({ page }) => {
+  await page.goto('/orders', { waitUntil: 'networkidle' })
+
+  await page.getByPlaceholder('Nome do cliente').fill('Customer 11')
+
+  await page.getByRole('button', { name: 'Filtrar resultados' }).click()
+
+  expect(page.getByRole('cell', { name: 'Customer 11' })).toBeVisible()
+})
+
+test('filter by status', async ({ page }) => {
+  await page.goto('/orders', { waitUntil: 'networkidle' })
+
+  await page.getByRole('combobox').click()
+
+  await page.getByLabel('Pendente').click()
+
+  await page.getByRole('button', { name: 'Filtrar resultados' }).click()
+
+  const tableRows = await page.getByRole('cell', { name: 'Pendente' }).all()
+
+  expect(tableRows).toHaveLength(10)
+
+  // await page.waitForTimeout(1000)
+})
